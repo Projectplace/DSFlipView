@@ -2,6 +2,8 @@
 
 DSFlipView lets you easily make an album flip view from iPad iPod app. 
 
+![Sample](https://raw.github.com/kiding/DSFlipView/gh-pages/title.png)
+
 Check out the sample video <a href="http://kiding.github.com/DSFlipView/">**here**</a>. <a href="https://raw.github.com/kiding/DSFlipView/gh-pages/example.mov">(Direct Link)</a>
 
 ## Features
