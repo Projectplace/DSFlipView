@@ -60,7 +60,7 @@
 <li>At storyboard, attach an empty view and change its class to <code>DSFlipView</code>.</li>
 <li>Move the views you want to display inside the flip view in order to make them subviews of it.</li>
 <li>Connect the outlets. <code>backView</code> is to the background (usually its super) view, <code>smallView</code> is to the view to be displayed first("closed"), and  <code>bigView</code> is to the view next("opened").</li>
-</ol><p>Some properties would be adjustable with code; check out below.</p>
+</ol><p>That's it. If you want to adjust some properties; check out below.</p>
 
 <h3>Using Code Implementation</h3>
 
@@ -119,7 +119,18 @@ flip.bigSize = (CGSize){200,250};
 <td>blackView</td>
 <td>View to accept user's gesture to "close" the view.</td>
 </tr>
-</table><h1>License</h1>
+</table>
+
+<h3>Re-positioning</h3>
+
+<p>If you need to re-position the view, for example when user changed the device's orientation, just call:</p>
+
+<pre><code>[flip setNeedsLayout];
+</code></pre>
+
+<p>then it will automatically position itself at the center of the view.</p>
+
+<h1>License</h1>
 
 <p>This project is under MIT License.</p>
 
