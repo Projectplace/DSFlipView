@@ -1,0 +1,345 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFC8E75115D75E9F003FEFD2 /* DSFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC8E75015D75E9F003FEFD2 /* DSFlipView.m */; };
+		DFD733C815D763E100567AF7 /* book1.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD733C415D763E100567AF7 /* book1.png */; };
+		DFD733C915D763E100567AF7 /* book2.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD733C515D763E100567AF7 /* book2.png */; };
+		DFD733CA15D763E100567AF7 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD733C615D763E100567AF7 /* lock.png */; };
+		DFD733CB15D763E100567AF7 /* unlock.png in Resources */ = {isa = PBXBuildFile; fileRef = DFD733C715D763E100567AF7 /* unlock.png */; };
+		DFD733CE15D763F000567AF7 /* MainStoryboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFD733CC15D763F000567AF7 /* MainStoryboard-iPad.storyboard */; };
+		DFEFEAA215D6313B00D0FCF0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEFEAA115D6313B00D0FCF0 /* UIKit.framework */; };
+		DFEFEAA415D6313B00D0FCF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEFEAA315D6313B00D0FCF0 /* Foundation.framework */; };
+		DFEFEAA615D6313B00D0FCF0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEFEAA515D6313B00D0FCF0 /* CoreGraphics.framework */; };
+		DFEFEAAC15D6313B00D0FCF0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DFEFEAAA15D6313B00D0FCF0 /* InfoPlist.strings */; };
+		DFEFEAAE15D6313B00D0FCF0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEFEAAD15D6313B00D0FCF0 /* main.m */; };
+		DFEFEAB215D6313B00D0FCF0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEFEAB115D6313B00D0FCF0 /* AppDelegate.m */; };
+		DFEFEAB515D6313B00D0FCF0 /* MainStoryboard-iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFEFEAB315D6313B00D0FCF0 /* MainStoryboard-iPhone.storyboard */; };
+		DFEFEAB815D6313B00D0FCF0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFEFEAB715D6313B00D0FCF0 /* ViewController.m */; };
+		DFEFEAC315D6337F00D0FCF0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFEFEAC215D6337F00D0FCF0 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DFC8E74F15D75E9F003FEFD2 /* DSFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSFlipView.h; path = Classes/DSFlipView.h; sourceTree = SOURCE_ROOT; };
+		DFC8E75015D75E9F003FEFD2 /* DSFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSFlipView.m; path = Classes/DSFlipView.m; sourceTree = SOURCE_ROOT; };
+		DFD733C415D763E100567AF7 /* book1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = book1.png; path = Resources/book1.png; sourceTree = "<group>"; };
+		DFD733C515D763E100567AF7 /* book2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = book2.png; path = Resources/book2.png; sourceTree = "<group>"; };
+		DFD733C615D763E100567AF7 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lock.png; path = Resources/lock.png; sourceTree = "<group>"; };
+		DFD733C715D763E100567AF7 /* unlock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unlock.png; path = Resources/unlock.png; sourceTree = "<group>"; };
+		DFD733CD15D763F000567AF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = "en.lproj/MainStoryboard-iPad.storyboard"; sourceTree = "<group>"; };
+		DFEFEA9D15D6313B00D0FCF0 /* DSFlipView Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DSFlipView Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFEFEAA115D6313B00D0FCF0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		DFEFEAA315D6313B00D0FCF0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		DFEFEAA515D6313B00D0FCF0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DFEFEAA915D6313B00D0FCF0 /* DSFlipView Example-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DSFlipView Example-Info.plist"; sourceTree = "<group>"; };
+		DFEFEAAB15D6313B00D0FCF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DFEFEAAD15D6313B00D0FCF0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DFEFEAAF15D6313B00D0FCF0 /* DSFlipView Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DSFlipView Example-Prefix.pch"; sourceTree = "<group>"; };
+		DFEFEAB015D6313B00D0FCF0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DFEFEAB115D6313B00D0FCF0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DFEFEAB415D6313B00D0FCF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = "en.lproj/MainStoryboard-iPhone.storyboard"; sourceTree = "<group>"; };
+		DFEFEAB615D6313B00D0FCF0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DFEFEAB715D6313B00D0FCF0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DFEFEAC215D6337F00D0FCF0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFEFEA9A15D6313B00D0FCF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEFEAC315D6337F00D0FCF0 /* QuartzCore.framework in Frameworks */,
+				DFEFEAA215D6313B00D0FCF0 /* UIKit.framework in Frameworks */,
+				DFEFEAA415D6313B00D0FCF0 /* Foundation.framework in Frameworks */,
+				DFEFEAA615D6313B00D0FCF0 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DFEFEA9215D6313B00D0FCF0 = {
+			isa = PBXGroup;
+			children = (
+				DFEFEAA715D6313B00D0FCF0 /* DSFlipView Example */,
+				DFEFEAA015D6313B00D0FCF0 /* Frameworks */,
+				DFEFEA9E15D6313B00D0FCF0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFEFEA9E15D6313B00D0FCF0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFEFEA9D15D6313B00D0FCF0 /* DSFlipView Example.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFEFEAA015D6313B00D0FCF0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DFEFEAC215D6337F00D0FCF0 /* QuartzCore.framework */,
+				DFEFEAA115D6313B00D0FCF0 /* UIKit.framework */,
+				DFEFEAA315D6313B00D0FCF0 /* Foundation.framework */,
+				DFEFEAA515D6313B00D0FCF0 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DFEFEAA715D6313B00D0FCF0 /* DSFlipView Example */ = {
+			isa = PBXGroup;
+			children = (
+				DFEFEAC115D6316000D0FCF0 /* Classes */,
+				DFEFEACC15D6392A00D0FCF0 /* Resources */,
+				DFEFEAA815D6313B00D0FCF0 /* Supporting Files */,
+				DFEFEAB315D6313B00D0FCF0 /* MainStoryboard-iPhone.storyboard */,
+				DFD733CC15D763F000567AF7 /* MainStoryboard-iPad.storyboard */,
+				DFEFEAB615D6313B00D0FCF0 /* ViewController.h */,
+				DFEFEAB715D6313B00D0FCF0 /* ViewController.m */,
+			);
+			path = "DSFlipView Example";
+			sourceTree = "<group>";
+		};
+		DFEFEAA815D6313B00D0FCF0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFEFEAB015D6313B00D0FCF0 /* AppDelegate.h */,
+				DFEFEAB115D6313B00D0FCF0 /* AppDelegate.m */,
+				DFEFEAAD15D6313B00D0FCF0 /* main.m */,
+				DFEFEAAA15D6313B00D0FCF0 /* InfoPlist.strings */,
+				DFEFEAA915D6313B00D0FCF0 /* DSFlipView Example-Info.plist */,
+				DFEFEAAF15D6313B00D0FCF0 /* DSFlipView Example-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFEFEAC115D6316000D0FCF0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				DFC8E74F15D75E9F003FEFD2 /* DSFlipView.h */,
+				DFC8E75015D75E9F003FEFD2 /* DSFlipView.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		DFEFEACC15D6392A00D0FCF0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DFD733C415D763E100567AF7 /* book1.png */,
+				DFD733C515D763E100567AF7 /* book2.png */,
+				DFD733C615D763E100567AF7 /* lock.png */,
+				DFD733C715D763E100567AF7 /* unlock.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFEFEA9C15D6313B00D0FCF0 /* DSFlipView Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFEFEABB15D6313B00D0FCF0 /* Build configuration list for PBXNativeTarget "DSFlipView Example" */;
+			buildPhases = (
+				DFEFEA9915D6313B00D0FCF0 /* Sources */,
+				DFEFEA9A15D6313B00D0FCF0 /* Frameworks */,
+				DFEFEA9B15D6313B00D0FCF0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DSFlipView Example";
+			productName = "DSFlipView Example";
+			productReference = DFEFEA9D15D6313B00D0FCF0 /* DSFlipView Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFEFEA9415D6313B00D0FCF0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = "Don Kim";
+			};
+			buildConfigurationList = DFEFEA9715D6313B00D0FCF0 /* Build configuration list for PBXProject "DSFlipView Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DFEFEA9215D6313B00D0FCF0;
+			productRefGroup = DFEFEA9E15D6313B00D0FCF0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFEFEA9C15D6313B00D0FCF0 /* DSFlipView Example */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DFEFEA9B15D6313B00D0FCF0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEFEAAC15D6313B00D0FCF0 /* InfoPlist.strings in Resources */,
+				DFEFEAB515D6313B00D0FCF0 /* MainStoryboard-iPhone.storyboard in Resources */,
+				DFD733C815D763E100567AF7 /* book1.png in Resources */,
+				DFD733C915D763E100567AF7 /* book2.png in Resources */,
+				DFD733CA15D763E100567AF7 /* lock.png in Resources */,
+				DFD733CB15D763E100567AF7 /* unlock.png in Resources */,
+				DFD733CE15D763F000567AF7 /* MainStoryboard-iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFEFEA9915D6313B00D0FCF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFEFEAAE15D6313B00D0FCF0 /* main.m in Sources */,
+				DFEFEAB215D6313B00D0FCF0 /* AppDelegate.m in Sources */,
+				DFEFEAB815D6313B00D0FCF0 /* ViewController.m in Sources */,
+				DFC8E75115D75E9F003FEFD2 /* DSFlipView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DFD733CC15D763F000567AF7 /* MainStoryboard-iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFD733CD15D763F000567AF7 /* en */,
+			);
+			name = "MainStoryboard-iPad.storyboard";
+			sourceTree = "<group>";
+		};
+		DFEFEAAA15D6313B00D0FCF0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFEFEAAB15D6313B00D0FCF0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DFEFEAB315D6313B00D0FCF0 /* MainStoryboard-iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFEFEAB415D6313B00D0FCF0 /* en */,
+			);
+			name = "MainStoryboard-iPhone.storyboard";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DFEFEAB915D6313B00D0FCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DFEFEABA15D6313B00D0FCF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DFEFEABC15D6313B00D0FCF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DSFlipView Example/DSFlipView Example-Prefix.pch";
+				INFOPLIST_FILE = "DSFlipView Example/DSFlipView Example-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		DFEFEABD15D6313B00D0FCF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DSFlipView Example/DSFlipView Example-Prefix.pch";
+				INFOPLIST_FILE = "DSFlipView Example/DSFlipView Example-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFEFEA9715D6313B00D0FCF0 /* Build configuration list for PBXProject "DSFlipView Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEFEAB915D6313B00D0FCF0 /* Debug */,
+				DFEFEABA15D6313B00D0FCF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFEFEABB15D6313B00D0FCF0 /* Build configuration list for PBXNativeTarget "DSFlipView Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFEFEABC15D6313B00D0FCF0 /* Debug */,
+				DFEFEABD15D6313B00D0FCF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFEFEA9415D6313B00D0FCF0 /* Project object */;
+}
