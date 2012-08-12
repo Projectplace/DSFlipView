@@ -2,7 +2,7 @@
 
 DSFlipView lets you easily make an album flip view from iPad iPod app. 
 
-![Sample](https://raw.github.com/kiding/DSFlipView/gh-pages/title.png)
+<img src="https://raw.github.com/kiding/DSFlipView/gh-pages/title.png" height=400 alt="sample">
 
 Check out the sample video <a href="http://kiding.github.com/DSFlipView/">**here**</a>. <a href="https://raw.github.com/kiding/DSFlipView/gh-pages/example.mov">(Direct Link)</a>
 
@@ -27,7 +27,7 @@ You can use DSFlipView with Storyboard.
 4. Move the views you want to display inside the flip view in order to make them subviews of it.
 5. Connect the outlets. `backView` is to the background (usually its super) view, `smallView` is to the view to be displayed first("closed"), and  `bigView` is to the view next("opened").
 
-Some properties would be adjustable with code; check out below.
+That's it. If you want to adjust some properties; check out below.
 
 ### Using Code Implementation
 
@@ -60,6 +60,15 @@ flip.bigSize = (CGSize){200,250};
 | dummyView  | View to be returned to the original point when the view is "opened".                                 |
 | blackView  | View to accept user's gesture to "close" the view.                                                   |
 
+### Re-positioning
+
+If you need to re-position the view, for example when user changed the device's orientation, just call:
+
+```
+[flip setNeedsLayout];
+```
+
+then it will automatically position itself at the center of the view.
 
 # License
 
