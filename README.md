@@ -2,10 +2,7 @@
 
 DSFlipView lets you easily make an album flip view from iPad iPod app. 
 
-<video width="520" height="520" controls="controls">
-  <source src="http://cloud.github.com/downloads/kiding/DSFlipView/example.mov" type="video/mp4" />
-  <embed src="http://cloud.github.com/downloads/kiding/DSFlipView/example.mov" width=520 height=520 autostart=false>
-</video>
+Check out the sample video <a href="http://kiding.github.com/DSFlipView/">**here**</a>. <a href="https://raw.github.com/kiding/DSFlipView/gh-pages/example.mov">(Direct Link)</a>
 
 ## Features
 
@@ -18,7 +15,7 @@ DSFlipView lets you easily make an album flip view from iPad iPod app.
 
 ### Using Storyboard (Interface Builder)
 
-![Storyboard](http://cloud.github.com/downloads/kiding/DSFlipView/storyboard.png)
+![Storyboard](https://raw.github.com/kiding/DSFlipView/gh-pages/storyboard.png)
 
 You can use DSFlipView with Storyboard. 
 
@@ -30,7 +27,7 @@ You can use DSFlipView with Storyboard.
 
 Some properties would be adjustable with code; check out below.
 
-### Code Implmentation
+### Using Code Implementation
 
 ```
 UIView *smallView = …;
@@ -44,7 +41,7 @@ flip.bigSize = (CGSize){200,250};
 [self.view addSubview:flip];
 ```
 
-<img src="http://cloud.github.com/downloads/kiding/DSFlipView/structure.png" alt="View Structure of Example">
+<img src="https://raw.github.com/kiding/DSFlipView/gh-pages/structure.png" alt="View Structure of Example">
 
 
 | Properties | (Required)						                                        |
