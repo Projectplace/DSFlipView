@@ -44,11 +44,11 @@ flip.bigSize = (CGSize){200,250};
 <img src="https://raw.github.com/kiding/DSFlipView/gh-pages/structure.png" alt="View Structure of Example">
 
 
-| Properties | (Required)						                                        |
+| Properties | (Required)						                                                         |
 | ---------- | ------------------------------------------------------------------------ |
 | backView   | Background view, usually the superview.                                  |
 | smallView  | Initially displayed view.                                                |
-| bigView    | View to be displayed after. The position will be the center of backView. |
+| bigView    | View to be displayed later; the position will be the center of backView. |
 
 | Properties | (Optional)                                                                                           |
 | ---------- | ---------------------------------------------------------------------------------------------------- |
