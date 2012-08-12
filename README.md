@@ -4,8 +4,7 @@ DSFlipView lets you easily make an album flip view from iPad iPod app.
 
 <video width="520" height="520" controls="controls">
   <source src="http://cloud.github.com/downloads/kiding/DSFlipView/example.mov" type="video/mp4" />
-  Your browser does not support the video tag.
-  Watch the video <a href="http://cloud.github.com/downloads/kiding/DSFlipView/example.mov">here</a>.
+  <embed src="http://cloud.github.com/downloads/kiding/DSFlipView/example.mov" width=520 height=520 autostart=false>
 </video>
 
 ## Features
@@ -45,7 +44,7 @@ flip.bigSize = (CGSize){200,250};
 [self.view addSubview:flip];
 ```
 
-[![View Structure of the Example](http://cloud.github.com/downloads/kiding/DSFlipView/structure.png "View Structure")](http://cloud.github.com/downloads/kiding/DSFlipView/ "View Structure of the Example")
+<img src="http://cloud.github.com/downloads/kiding/DSFlipView/structure.png" alt="View Structure of Example">
 
 
 | Properties | (Required)						                                        |
