@@ -151,10 +151,6 @@
     [_backView bringSubviewToFront:self];
     
     _blackView.userInteractionEnabled = NO;
-    [UIView animateWithDuration:_duration animations:^{
-        _blackView.alpha = 1;
-    }];
-    
     // smallView bigView init
     _smallView.hidden = NO;
     _smallView.userInteractionEnabled = NO;
@@ -267,7 +263,7 @@
     tintView.userInteractionEnabled = NO;
     tintView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
     tintView.backgroundColor = [UIColor blackColor];
-    tintView.alpha = 0;
+    tintView.layer.opacity = 0;
     [self addSubview:tintView];
     
     {
@@ -301,7 +297,7 @@
         // opacity
         CAKeyframeAnimation *opacity = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
         opacity.keyTimes = @[ @0, @0.5, @1 ];
-        opacity.values = @[ @0, @0.7, @0 ];
+        opacity.values = @[ @0, @0.8, @0 ];
         opacity.timingFunction = timing;
         opacity.duration = _duration;
         
@@ -312,24 +308,29 @@
         [tintLayer addAnimation:group forKey:@"group"];
     }
     
+    // toggle visibility
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _duration * 0.5f * NSEC_PER_SEC), dispatch_get_main_queue(),
                    ^(void){
                        _smallView.hidden = YES;
                        _bigView.hidden = NO;
                    });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _duration * 0.98f * NSEC_PER_SEC), dispatch_get_main_queue(),
-                   ^(void){
-                       self.frame = bigFrame;
-                       
-                       _bigView.userInteractionEnabled = YES;
-                       _blackView.userInteractionEnabled = YES;
-                       
-                       _isOpened = YES;
-                       
-                       // destroy useless views
-                       [tintView removeFromSuperview];
-                   });
+    // blackView animation & completion
+    [UIView animateWithDuration:_duration animations:^{
+        _blackView.alpha = 1;
+    } completion:^(BOOL finished) {
+        if(finished) {
+            self.frame = bigFrame;
+
+            _bigView.userInteractionEnabled = YES;
+            _blackView.userInteractionEnabled = YES;
+            
+            _isOpened = YES;
+            
+            // destroy useless views
+            [tintView removeFromSuperview];
+        }
+    }];
 }
 
 -(IBAction)close:(id)sender
@@ -348,9 +349,6 @@
     
     // black view
     _blackView.userInteractionEnabled = NO;
-    [UIView animateWithDuration:_duration animations:^{
-        _blackView.alpha = 0;
-    }];
     
     // smallView bigView init
     _smallView.hidden = YES;
@@ -462,7 +460,7 @@
     tintView.userInteractionEnabled = NO;
     tintView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
     tintView.backgroundColor = [UIColor blackColor];
-    tintView.alpha = 1;
+    tintView.layer.opacity = 0;
     [self addSubview:tintView];
     
     {
@@ -496,7 +494,7 @@
         // opacity
         CAKeyframeAnimation *opacity = [CAKeyframeAnimation animationWithKeyPath:@"opacity"];
         opacity.keyTimes = @[ @0, @0.5, @1 ];
-        opacity.values = @[ @0, @0.7, @0 ];
+        opacity.values = @[ @0, @0.8, @0 ];
         opacity.timingFunction = timing;
         opacity.duration = _duration;
         
@@ -505,28 +503,31 @@
         group.animations = @[ rotationY, position, bounds, opacity ];
         group.duration = _duration;
         [tintLayer addAnimation:group forKey:@"group"];
+        
     }
     
-    
+    // toggle visibility
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _duration * 0.5f * NSEC_PER_SEC), dispatch_get_main_queue(),
                    ^(void){
                        _smallView.hidden = NO;
                        _bigView.hidden = YES;
                    });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, _duration * 0.98f * NSEC_PER_SEC), dispatch_get_main_queue(),
-                   ^(void){
-                       self.frame = _dummyView.frame;
-                       
-                       _smallView.userInteractionEnabled = YES;
-                       
-                       // destroy useless views
-                       [_dummyView removeFromSuperview];
-                       _dummyView = nil;
-                       
-                       [_blackView removeFromSuperview];
-                       [tintView removeFromSuperview];
-                   });
+    // blackView animation & completion
+    [UIView animateWithDuration:_duration animations:^{
+        _blackView.alpha = 0;
+    } completion:^(BOOL finished) {
+        self.frame = _dummyView.frame;
+        
+        _smallView.userInteractionEnabled = YES;
+        
+        // destroy useless views
+        [_dummyView removeFromSuperview];
+        _dummyView = nil;
+        
+        [_blackView removeFromSuperview];
+        [tintView removeFromSuperview];
+    }];
 }
 
 - (void) layoutSubviews
