@@ -13,7 +13,7 @@
     layer.shadowOpacity = 0.6f;
     layer.shadowRadius = 0;
     
-    // DSFlipView: Code Example
+    // secondFlip: Code Example
     UIImageView *smallView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock.png"]];
     UIImageView *bigView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unlock.png"]];
     DSFlipView *secondFlip = [[DSFlipView alloc] initWithFrame:CGRectMake(20, 20, 80, 80)];
@@ -24,6 +24,13 @@
     secondFlip.bigSize = (CGSize){200,250};
     [self.view addSubview:secondFlip];
     self.secondFlip = secondFlip;
+    
+    // thirdFlip: Code Example
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+        _thirdFlip.bigSize = (CGSize){250, 250};
+    else
+        _thirdFlip.bigSize = (CGSize){400, 400};
+    _thirdFlip.duration = 2.0f;
 }
 
 - (void)viewDidUnload
@@ -31,6 +38,7 @@
     [self setTextView:nil];
     [self setFirstFlip:nil];
     [self setSecondFlip:nil];
+    [self setThirdFlip:nil];
     [super viewDidUnload];
 }
 
@@ -39,6 +47,7 @@
     // Re-position bigView when orientation is changed.
     [_firstFlip setNeedsLayout];
     [_secondFlip setNeedsLayout];
+    [_thirdFlip setNeedsLayout];
     return YES;
 }
 

@@ -5,6 +5,7 @@
 
 @property (weak, nonatomic) IBOutlet DSFlipView *firstFlip;
 @property (weak, nonatomic) DSFlipView *secondFlip;
+@property (weak, nonatomic) IBOutlet DSFlipView *thirdFlip;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
 @end

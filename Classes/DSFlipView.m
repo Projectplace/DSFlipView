@@ -34,6 +34,12 @@
 
 - (void) layoutSubviews;
 
+#pragma mark - blackTapper Delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer;
+
+@property (weak) UIView *superView;
+
 @end
 
 @implementation DSFlipView
@@ -80,11 +86,20 @@
         _blackView = [[UIView alloc] init];
         _blackView.frame = _backView.bounds;
         _blackView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
-        _blackView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+        _blackView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
         _blackView.userInteractionEnabled = NO;
         
         UITapGestureRecognizer *blackTapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(close:)];
-        _blackView.gestureRecognizers = @[ blackTapper ];
+        blackTapper.delegate = self;
+        
+        // prevent user interaction behind blackView
+        UIPinchGestureRecognizer *nilPinch = [[UIPinchGestureRecognizer alloc] init];
+        UIRotationGestureRecognizer *nilRotation = [[UIRotationGestureRecognizer alloc] init];
+        UISwipeGestureRecognizer *nilSwipe = [[UISwipeGestureRecognizer alloc] init];
+        UIPanGestureRecognizer *nilPan = [[UIPanGestureRecognizer alloc] init];
+        UILongPressGestureRecognizer *nilLong = [[UILongPressGestureRecognizer alloc] init];
+        
+        _blackView.gestureRecognizers = @[ blackTapper, nilPinch, nilRotation, nilSwipe, nilPan, nilLong ];
     } else
         _blackView = nil;
 }
@@ -145,27 +160,35 @@
     // black view
     _blackView.frame = _backView.bounds;
     _blackView.userInteractionEnabled = NO;
-    _blackView.alpha = 0;
+    _blackView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     
+    // detach self from its superview and move to blackView
+    _superView = self.superview;
+    
+    DSFlipView *me = self; // just to increase retain count while self is removed from superview
+    [me removeFromSuperview];
     [_backView addSubview:_blackView];
-    [_backView bringSubviewToFront:self];
+    [_blackView addSubview:self];
     
-    _blackView.userInteractionEnabled = NO;
+    self.frame = [_superView convertRect:self.frame toView:_blackView];
+    
     // smallView bigView init
     _smallView.hidden = NO;
     _smallView.userInteractionEnabled = NO;
     _bigView.hidden = YES;
     
-    // bigPosition bigOrigin bigFrame init
-    CGRect backBounds = [(_backView ? _backView : self.superview) bounds];
-    CGPoint backPosition = (CGPoint){backBounds.size.width/2, backBounds.size.height/2};
-    CGPoint bigPosition = (CGPoint){_bigSize.width/2,_bigSize.height/2};
-    CGPoint bigOrigin = (CGPoint){backPosition.x - bigPosition.x, backPosition.y - bigPosition.y};
-    CGRect bigFrame = (CGRect){bigOrigin, _bigSize};
+    // outerPosition innerPosition outerFrame init
+    CGPoint theCenter = (_backView ? _backView : self.superview).center;
+    CGRect theBounds = (CGRect){(CGPoint){0,0}, _bigSize};
+
+    CGPoint outerPosition = [_backView.superview convertPoint:theCenter toView:_backView];
+    CGPoint innerPosition = (CGPoint){_bigSize.width/2, _bigSize.height/2};
+
+    CGRect outerFrame = (CGRect){(CGPoint){outerPosition.x - _bigSize.width/2, outerPosition.y - _bigSize.height/2}, _bigSize};
     
     CAMediaTimingFunction *timing = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
-    // small: rotation, position(bigPosition), bounds
+    // small: rotation, position, bounds
     {
         CALayer *small = _smallView.layer;
         
@@ -183,13 +206,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:bigPosition];
+        position.toValue = [NSValue valueWithCGPoint:innerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){_smallView.layer.bounds.origin, _bigSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -200,7 +223,7 @@
         [small addAnimation:group forKey:@"group"];
     }
     
-    // big: rotation, position(bigPosition), bounds
+    // big: rotation, position, bounds
     {
         CALayer *big = _bigView.layer;
         
@@ -218,13 +241,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:bigPosition];
+        position.toValue = [NSValue valueWithCGPoint:innerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){_bigView.layer.bounds.origin, _bigSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -235,19 +258,19 @@
         [big addAnimation:group forKey:@"group"];
     }
     
-    // wrapper: position(backPosition), bounds
+    // wrapper: position, bounds
     {
         CALayer *wrapper = self.layer;
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:backPosition];
+        position.toValue = [NSValue valueWithCGPoint:outerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){self.layer.bounds.origin, _bigSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -258,7 +281,7 @@
         [wrapper addAnimation:group forKey:@"group"];
     }
     
-    // tintView: black shadow: rotation, position(bigPosition), bounds, opacity
+    // tintView: black shadow: rotation, position, bounds, opacity
     UIView *tintView = [[UIView alloc] initWithFrame:self.bounds];
     tintView.userInteractionEnabled = NO;
     tintView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
@@ -284,13 +307,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:bigPosition];
+        position.toValue = [NSValue valueWithCGPoint:innerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){_bigView.layer.bounds.origin, _bigSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -316,12 +339,12 @@
                    });
     
     // blackView animation & completion
-    [UIView animateWithDuration:_duration animations:^{
-        _blackView.alpha = 1;
+    [UIView animateWithDuration:_duration-0.05f animations:^{
+        _blackView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     } completion:^(BOOL finished) {
         if(finished) {
-            self.frame = bigFrame;
-
+            self.frame = outerFrame;
+            
             _bigView.userInteractionEnabled = YES;
             _blackView.userInteractionEnabled = YES;
             
@@ -355,10 +378,13 @@
     _bigView.hidden = NO;
     _bigView.userInteractionEnabled = NO;
     
-    // smallPosition smallFrame smallSize init
-    CGPoint smallPosition = _dummyView.layer.position;
-    CGRect smallFrame = _dummyView.frame;
-    CGSize smallSize = smallFrame.size;
+    // outerPosition innerPosition outerFrame init
+    CGPoint theCenter = _dummyView.center;
+    CGRect theBounds = (CGRect){(CGPoint){0,0}, _dummyView.frame.size};
+    
+    CGPoint outerPosition = [_dummyView.superview convertPoint:theCenter toView:_blackView];
+    CGPoint innerPosition = (CGPoint){_dummyView.frame.size.width/2, _dummyView.frame.size.height/2};
+    CGRect outerFrame = [_dummyView.superview convertRect:_dummyView.frame toView:_blackView];
     
     CAMediaTimingFunction *timing = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     
@@ -380,13 +406,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:(CGPoint){smallSize.width/2,smallSize.height/2}];
+        position.toValue = [NSValue valueWithCGPoint:innerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){_smallView.layer.bounds.origin, smallSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -415,13 +441,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:(CGPoint){smallSize.width/2,smallSize.height/2}];
+        position.toValue = [NSValue valueWithCGPoint:innerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){_smallView.layer.bounds.origin, smallSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -438,13 +464,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:smallPosition];
+        position.toValue = [NSValue valueWithCGPoint:outerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){self.layer.bounds.origin, smallSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -481,13 +507,13 @@
         
         // position
         CABasicAnimation *position = [CABasicAnimation animationWithKeyPath:@"position"];
-        position.toValue = [NSValue valueWithCGPoint:(CGPoint){smallSize.width/2,smallSize.height/2}];
+        position.toValue = [NSValue valueWithCGPoint:innerPosition];
         position.duration = _duration;
         position.timingFunction = timing;
         
         // bounds
         CABasicAnimation *bounds = [CABasicAnimation animationWithKeyPath:@"bounds"];
-        bounds.toValue = [NSValue valueWithCGRect:(CGRect){_smallView.layer.bounds.origin, smallSize}];
+        bounds.toValue = [NSValue valueWithCGRect:theBounds];
         bounds.duration = _duration;
         bounds.timingFunction = timing;
         
@@ -514,19 +540,33 @@
                    });
     
     // blackView animation & completion
-    [UIView animateWithDuration:_duration animations:^{
-        _blackView.alpha = 0;
+    [UIView animateWithDuration:_duration-0.05f animations:^{
+        _blackView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
     } completion:^(BOOL finished) {
-        self.frame = _dummyView.frame;
-        
-        _smallView.userInteractionEnabled = YES;
-        
-        // destroy useless views
-        [_dummyView removeFromSuperview];
-        _dummyView = nil;
-        
-        [_blackView removeFromSuperview];
-        [tintView removeFromSuperview];
+        if(finished) {
+            _smallView.userInteractionEnabled = YES;
+            
+            // detach self from blackView and move to superView
+            self.frame = outerFrame;
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05f * NSEC_PER_SEC), dispatch_get_main_queue(),
+                           ^(void){
+                               DSFlipView *me = self; // just to increase retain count while self is removed from superview
+                               [me removeFromSuperview];
+                               self.frame = _dummyView.frame;
+                               [_superView addSubview:self];
+                               
+                               _superView = nil;
+                               
+                               // destroy useless views
+                               [_dummyView removeFromSuperview];
+                               _dummyView = nil;
+                               
+                               [_blackView removeFromSuperview];
+                               [tintView removeFromSuperview];
+                           });
+            
+        }
     }];
 }
 
@@ -534,14 +574,24 @@
 {
     // Re-position bigView when orientation is changed.
     if(_isOpened) {
-        CGRect backBounds = [(_backView ? _backView : self.superview) bounds];
-        CGPoint backPosition = (CGPoint){backBounds.size.width/2, backBounds.size.height/2};
-        CGPoint bigPosition = (CGPoint){_bigSize.width/2,_bigSize.height/2};
-        CGPoint bigOrigin = (CGPoint){backPosition.x - bigPosition.x, backPosition.y - bigPosition.y};
-        CGRect bigFrame = (CGRect){bigOrigin, _bigSize};
-        
-        self.frame = bigFrame;
+        CGPoint theCenter = (_backView ? _backView : self.superview).center;
+        CGPoint outerPosition = [_backView.superview convertPoint:theCenter toView:_backView];
+        CGRect outerFrame = (CGRect){(CGPoint){outerPosition.x - _bigSize.width/2, outerPosition.y - _bigSize.height/2}, _bigSize};
+        self.frame = outerFrame;
     }
 }
+
+#pragma mark - blackTapper Delegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    // prevents blackView's subview(self)'s tap events
+    CGPoint origin = [gestureRecognizer locationInView:self];
+    if(origin.x > 0 && origin.x < self.frame.size.width && origin.y > 0 && origin.y < self.frame.size.height) // inside self
+        return NO;
+    else
+        return YES;
+}
+
 
 @end
