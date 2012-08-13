@@ -11,6 +11,7 @@ Check out the sample video <a href="http://kiding.github.com/DSFlipView/">**here
 * Displays two views one at a time with flip animation at user's tap gesture.
 * Easy implementation with Storyboard (Interface Builder).
 * Built on Core Animation.
+* UITableViewCell-Ready. Yes.
 * ARC(Automatic Reference Counting), Modern Objective-C syntax are used. Xcode 4.4+ is required.
 
 ## How to Use
