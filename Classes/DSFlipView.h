@@ -37,4 +37,9 @@
 @property (readonly) UIView *dummyView;
 @property (readonly) UIView *blackView;
 
+@property (nonatomic, copy) void (^openPreparation) ();
+@property (nonatomic, copy) void (^closePreparation) ();
+@property (nonatomic, copy) void (^openCompletion) ();
+@property (nonatomic, copy) void (^closeCompletion) ();
+
 @end

@@ -29,6 +29,23 @@
     secondFlip.bigView = bigView;
     secondFlip.duration = 1.0f;
     secondFlip.bigSize = (CGSize){200,250};
+    
+    secondFlip.openPreparation = ^() {
+        NSLog(@"Opening...");
+    };
+    
+    secondFlip.openCompletion = ^() {
+        NSLog(@"Opened.");
+    };
+
+    secondFlip.closePreparation = ^() {
+        NSLog(@"Closing...");
+    };
+
+    secondFlip.closeCompletion = ^() {
+        NSLog(@"Closed.");
+    };
+
     [self.view addSubview:secondFlip];
     self.secondFlip = secondFlip;
     

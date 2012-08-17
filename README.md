@@ -53,12 +53,16 @@ flip.bigSize = (CGSize){200,250};
 | smallView  | Initially displayed view.                                                |
 | bigView    | View to be displayed later; the position will be the center of backView. |
 
-| Properties | (Optional)                                                                                           |
-| ---------- | ---------------------------------------------------------------------------------------------------- |
-| duration   | Duration of the flip animation.                                                                      |
-| bigSize    | Size of bigView. Even if bigView is made with certain frame, it will be shrunken down/up to bigSize. |
-| dummyView  | View to be returned to the original point when the view is "opened".                                 |
-| blackView  | View to accept user's gesture to "close" the view.                                                   |
+| Properties       | (Optional)                                                                                           |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| duration         | Duration of the flip animation.                                                                      |
+| bigSize          | Size of bigView. Even if bigView is made with certain frame, it will be shrunken down/up to bigSize. |
+| dummyView        | View to be returned to the original point when the view is "opened".                                 |
+| blackView        | View to accept user's gesture to "close" the view.                                                   |
+| openPreparation  | Block to be called just before open animation starts.                                                |
+| openCompletion   | Block to be called just after open animation ends.                                                   |
+| closePreparation | Block to be called just before close animation starts.                                               |
+| closeCompletion  | Block to be called just after close animation ends.                                                  |
 
 ### Re-positioning
 

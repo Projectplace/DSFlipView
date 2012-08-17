@@ -55,6 +55,11 @@ BOOL isDSFlipViewAnimating = NO;
     _duration = .5f;
     _bigSize = (CGSize){250,250};
     
+    _openPreparation = ^(){};
+    _closePreparation = ^(){};
+    _openCompletion = ^(){};
+    _closeCompletion = ^(){};
+    
     // shadow
     CALayer *layer = self.layer;
     layer.shadowColor = [UIColor blackColor].CGColor;
@@ -150,6 +155,8 @@ BOOL isDSFlipViewAnimating = NO;
     // DO NOT ANIMATE WHILE OTHER IS ANIMATING
     if(isDSFlipViewAnimating)
         return;
+    
+    _openPreparation();
 
     // flags
     isDSFlipViewOpened = NO;
@@ -382,12 +389,16 @@ BOOL isDSFlipViewAnimating = NO;
             // flags
             isDSFlipViewOpened = YES;
             isDSFlipViewAnimating = NO;
+            
+            _openCompletion();
         }
     }];
 }
 
 -(IBAction)close:(id)sender
 {
+    _closePreparation();
+    
     // DO NOT ANIMATE WHILE OTHER IS ANIMATING
     if(isDSFlipViewAnimating)
         return;
@@ -618,6 +629,8 @@ BOOL isDSFlipViewAnimating = NO;
                                // flags
                                isDSFlipViewOpened = NO;
                                isDSFlipViewAnimating = NO;
+                               
+                               _closeCompletion();
                            });
             
         }
