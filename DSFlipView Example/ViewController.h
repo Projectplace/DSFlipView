@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "DSFlipView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet DSFlipView *firstFlip;
 @property (weak, nonatomic) DSFlipView *secondFlip;

@@ -50,7 +50,7 @@ All Images From: The Noun Project (http://thenounproject.com)</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="StC-xM-HMq" customClass="DSFlipView">
-                                        <rect key="frame" x="67" y="0.0" width="147" height="133"/>
+                                        <rect key="frame" x="67" y="120" width="147" height="133"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="unlock.png" id="SEo-wF-teO">

@@ -118,6 +118,7 @@ BOOL isDSFlipViewAnimating = NO;
         smallView.frame = self.bounds;
         smallView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
         smallView.userInteractionEnabled = YES;
+        smallView.clipsToBounds = YES;
         smallView.hidden = NO;
         
         UITapGestureRecognizer *smallTapper = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(open:)];
@@ -137,6 +138,7 @@ BOOL isDSFlipViewAnimating = NO;
         bigView.frame = self.bounds;
         bigView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleBottomMargin;
         bigView.userInteractionEnabled = NO;
+        bigView.clipsToBounds = YES;
         bigView.hidden = YES;
         
         [self addSubview:bigView];
@@ -208,7 +210,7 @@ BOOL isDSFlipViewAnimating = NO;
         // http://cocoaconvert.net/2009/05/24/flippin-modal-panels/
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = 1.0 / -850;
-        small.transform = transform;
+        small.sublayerTransform = transform;
         
         CABasicAnimation *rotationY = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
         rotationY.fromValue = [NSNumber numberWithFloat:0];
@@ -233,6 +235,13 @@ BOOL isDSFlipViewAnimating = NO;
         group.animations = @[ rotationY, position, bounds ];
         group.duration = _duration;
         [small addAnimation:group forKey:@"group"];
+        
+        // apply to sublayers
+        CAAnimationGroup *subGroup = [CAAnimationGroup animation];
+        subGroup.animations = @[ position, bounds ];
+        subGroup.duration = _duration;
+        for(CALayer *s in small.sublayers)
+            [s addAnimation:subGroup forKey:@"group"];
     }
     
     // big: rotation, position, bounds
@@ -243,7 +252,7 @@ BOOL isDSFlipViewAnimating = NO;
         // http://cocoaconvert.net/2009/05/24/flippin-modal-panels/
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = 1.0 / 850;
-        big.transform = transform;
+        big.sublayerTransform = transform;
         
         CABasicAnimation *rotationY = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
         rotationY.fromValue = [NSNumber numberWithFloat:M_PI];
@@ -268,6 +277,13 @@ BOOL isDSFlipViewAnimating = NO;
         group.animations = @[ rotationY, position, bounds ];
         group.duration = _duration;
         [big addAnimation:group forKey:@"group"];
+        
+        // apply to sublayers
+        CAAnimationGroup *subGroup = [CAAnimationGroup animation];
+        subGroup.animations = @[ position, bounds ];
+        subGroup.duration = _duration;
+        for(CALayer *s in big.sublayers)
+            [s addAnimation:subGroup forKey:@"group"];
     }
     
     // wrapper: position, bounds
@@ -309,7 +325,7 @@ BOOL isDSFlipViewAnimating = NO;
         // http://cocoaconvert.net/2009/05/24/flippin-modal-panels/
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = 1.0 / -850;
-        tintLayer.transform = transform;
+        tintLayer.sublayerTransform = transform;
         
         CAKeyframeAnimation *rotationY = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.y"];
         rotationY.keyTimes = @[ @0, @0.5, @1 ];
@@ -416,7 +432,7 @@ BOOL isDSFlipViewAnimating = NO;
         // http://cocoaconvert.net/2009/05/24/flippin-modal-panels/
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = 1.0 / -850;
-        small.transform = transform;
+        small.sublayerTransform = transform;
         
         CABasicAnimation *rotationY = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
         rotationY.fromValue = [NSNumber numberWithFloat:M_PI];
@@ -441,6 +457,13 @@ BOOL isDSFlipViewAnimating = NO;
         group.animations = @[ rotationY, position, bounds ];
         group.duration = _duration;
         [small addAnimation:group forKey:@"group"];
+        
+        // apply to sublayers
+        CAAnimationGroup *subGroup = [CAAnimationGroup animation];
+        subGroup.animations = @[ position, bounds ];
+        subGroup.duration = _duration;
+        for(CALayer *s in small.sublayers)
+            [s addAnimation:subGroup forKey:@"group"];
     }
     
     // big: rotation, position, bounds, tint
@@ -451,7 +474,7 @@ BOOL isDSFlipViewAnimating = NO;
         // http://cocoaconvert.net/2009/05/24/flippin-modal-panels/
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = 1.0 / 850;
-        big.transform = transform;
+        big.sublayerTransform = transform;
         
         CABasicAnimation *rotationY = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
         rotationY.fromValue = [NSNumber numberWithFloat:0];
@@ -476,6 +499,13 @@ BOOL isDSFlipViewAnimating = NO;
         group.animations = @[ rotationY, position, bounds ];
         group.duration = _duration;
         [big addAnimation:group forKey:@"group"];
+        
+        // apply to sublayers
+        CAAnimationGroup *subGroup = [CAAnimationGroup animation];
+        subGroup.animations = @[ position, bounds ];
+        subGroup.duration = _duration;
+        for(CALayer *s in big.sublayers)
+            [s addAnimation:subGroup forKey:@"group"];
     }
     
     // wrapper: position, bounds
@@ -517,7 +547,7 @@ BOOL isDSFlipViewAnimating = NO;
         // http://cocoaconvert.net/2009/05/24/flippin-modal-panels/
         CATransform3D transform = CATransform3DIdentity;
         transform.m34 = 1.0 / -850;
-        tintLayer.transform = transform;
+        tintLayer.sublayerTransform = transform;
         
         CAKeyframeAnimation *rotationY = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.y"];
         rotationY.keyTimes = @[ @0, @0.5, @1 ];

@@ -15,7 +15,14 @@
     
     // secondFlip: Code Example
     UIImageView *smallView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lock.png"]];
+    
     UIImageView *bigView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unlock.png"]];
+    UITableView *bigTable = [[UITableView alloc] initWithFrame:bigView.bounds];
+    bigTable.autoresizingMask = bigView.autoresizingMask;
+    bigTable.backgroundColor = [UIColor clearColor];
+    bigTable.dataSource = self;
+    [bigView addSubview:bigTable];
+    
     DSFlipView *secondFlip = [[DSFlipView alloc] initWithFrame:CGRectMake(20, 20, 80, 80)];
     secondFlip.backView = self.view;
     secondFlip.smallView = smallView;
@@ -49,6 +56,21 @@
     [_secondFlip setNeedsLayout];
     [_thirdFlip setNeedsLayout];
     return YES;
+}
+
+#pragma mark - UITableViewDataSource
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    cell.textLabel.text = @"Hello.";
+    cell.textLabel.textColor = [UIColor whiteColor];
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 6;
 }
 
 @end

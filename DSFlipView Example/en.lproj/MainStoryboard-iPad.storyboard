@@ -31,7 +31,7 @@ All Images From: The Noun Project (http://thenounproject.com)</string>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="4k3-9V-Weh" customClass="DSFlipView">
-                                        <rect key="frame" x="260" y="0.0" width="147" height="133"/>
+                                        <rect key="frame" x="260" y="545" width="147" height="133"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="unlock.png" id="r5b-g7-yrB">
@@ -93,6 +93,26 @@ All Images From: The Noun Project (http://thenounproject.com)</string>
         <image name="book2.png" width="400" height="400"/>
         <image name="unlock.png" width="432" height="432"/>
     </resources>
+    <classes>
+        <class className="DSFlipView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DSFlipView.h"/>
+            <relationships>
+                <relationship kind="action" name="close:"/>
+                <relationship kind="action" name="open:"/>
+                <relationship kind="outlet" name="backView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="bigView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="smallView" candidateClass="UIView"/>
+            </relationships>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="firstFlip" candidateClass="DSFlipView"/>
+                <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
+                <relationship kind="outlet" name="thirdFlip" candidateClass="DSFlipView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
