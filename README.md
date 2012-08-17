@@ -57,7 +57,6 @@ flip.bigSize = (CGSize){200,250};
 | ---------- | ---------------------------------------------------------------------------------------------------- |
 | duration   | Duration of the flip animation.                                                                      |
 | bigSize    | Size of bigView. Even if bigView is made with certain frame, it will be shrunken down/up to bigSize. |
-| isOpened   | Indicates the view is "opened", bigView is visible and smallView is not.                             |
 | dummyView  | View to be returned to the original point when the view is "opened".                                 |
 | blackView  | View to accept user's gesture to "close" the view.                                                   |
 

@@ -33,7 +33,6 @@
 // Optional
 @property CGFloat duration;
 @property CGSize bigSize;
-@property (readonly) BOOL isOpened;
 
 @property (readonly) UIView *dummyView;
 @property (readonly) UIView *blackView;

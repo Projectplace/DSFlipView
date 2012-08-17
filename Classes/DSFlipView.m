@@ -20,9 +20,14 @@
 
 #import "DSFlipView.h"
 
+// flags
+BOOL isDSFlipViewOpened = NO;
+BOOL isDSFlipViewAnimating = NO;
+
 @interface DSFlipView ()
 
 - (void) initialize;
+- (id) initWithFrame: (CGRect) frame;
 - (id) initWithCoder:(NSCoder *)aDecoder;
 
 - (void) setBackView:(UIView *)backView;
@@ -49,7 +54,6 @@
     // init
     _duration = .5f;
     _bigSize = (CGSize){250,250};
-    _isOpened = NO;
     
     // shadow
     CALayer *layer = self.layer;
@@ -141,6 +145,14 @@
 
 -(IBAction)open:(id)sender
 {
+    // DO NOT ANIMATE WHILE OTHER IS ANIMATING
+    if(isDSFlipViewAnimating)
+        return;
+
+    // flags
+    isDSFlipViewOpened = NO;
+    isDSFlipViewAnimating = YES;
+    
     // error handling
     if(!_smallView)
         NSLog(@"DSFlipView <0x%x>: smallView is nil.", (NSInteger)self);
@@ -180,10 +192,10 @@
     // outerPosition innerPosition outerFrame init
     CGPoint theCenter = (_backView ? _backView : self.superview).center;
     CGRect theBounds = (CGRect){(CGPoint){0,0}, _bigSize};
-
+    
     CGPoint outerPosition = [_backView.superview convertPoint:theCenter toView:_backView];
     CGPoint innerPosition = (CGPoint){_bigSize.width/2, _bigSize.height/2};
-
+    
     CGRect outerFrame = (CGRect){(CGPoint){outerPosition.x - _bigSize.width/2, outerPosition.y - _bigSize.height/2}, _bigSize};
     
     CAMediaTimingFunction *timing = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -348,17 +360,25 @@
             _bigView.userInteractionEnabled = YES;
             _blackView.userInteractionEnabled = YES;
             
-            _isOpened = YES;
-            
             // destroy useless views
             [tintView removeFromSuperview];
+            
+            // flags
+            isDSFlipViewOpened = YES;
+            isDSFlipViewAnimating = NO;
         }
     }];
 }
 
 -(IBAction)close:(id)sender
 {
-    _isOpened = NO;
+    // DO NOT ANIMATE WHILE OTHER IS ANIMATING
+    if(isDSFlipViewAnimating)
+        return;
+
+    // flags
+    isDSFlipViewOpened = NO;
+    isDSFlipViewAnimating = YES;
     
     // error handling
     if(!_smallView)
@@ -564,6 +584,10 @@
                                
                                [_blackView removeFromSuperview];
                                [tintView removeFromSuperview];
+                               
+                               // flags
+                               isDSFlipViewOpened = NO;
+                               isDSFlipViewAnimating = NO;
                            });
             
         }
@@ -573,7 +597,7 @@
 - (void) layoutSubviews
 {
     // Re-position bigView when orientation is changed.
-    if(_isOpened) {
+    if(isDSFlipViewOpened) {
         CGPoint theCenter = (_backView ? _backView : self.superview).center;
         CGPoint outerPosition = [_backView.superview convertPoint:theCenter toView:_backView];
         CGRect outerFrame = (CGRect){(CGPoint){outerPosition.x - _bigSize.width/2, outerPosition.y - _bigSize.height/2}, _bigSize};
@@ -585,13 +609,12 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    // prevents blackView's subview(self)'s tap events
+    // blackTapper: should prevent tap events inside self
     CGPoint origin = [gestureRecognizer locationInView:self];
     if(origin.x > 0 && origin.x < self.frame.size.width && origin.y > 0 && origin.y < self.frame.size.height) // inside self
         return NO;
     else
         return YES;
 }
-
 
 @end
