@@ -157,7 +157,7 @@ BOOL isDSFlipViewAnimating = NO;
         return;
     
     _openPreparation();
-
+    
     // flags
     isDSFlipViewOpened = NO;
     isDSFlipViewAnimating = YES;
@@ -380,17 +380,20 @@ BOOL isDSFlipViewAnimating = NO;
         if(finished) {
             self.frame = outerFrame;
             
-            _bigView.userInteractionEnabled = YES;
-            _blackView.userInteractionEnabled = YES;
-            
-            // destroy useless views
-            [tintView removeFromSuperview];
-            
-            // flags
-            isDSFlipViewOpened = YES;
-            isDSFlipViewAnimating = NO;
-            
-            _openCompletion();
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05f * NSEC_PER_SEC), dispatch_get_main_queue(),
+                           ^(void){
+                               _bigView.userInteractionEnabled = YES;
+                               _blackView.userInteractionEnabled = YES;
+                               
+                               // destroy useless views
+                               [tintView removeFromSuperview];
+                               
+                               // flags
+                               isDSFlipViewOpened = YES;
+                               isDSFlipViewAnimating = NO;
+                               
+                               _openCompletion();
+                           });
         }
     }];
 }
@@ -402,7 +405,7 @@ BOOL isDSFlipViewAnimating = NO;
     // DO NOT ANIMATE WHILE OTHER IS ANIMATING
     if(isDSFlipViewAnimating)
         return;
-
+    
     // flags
     isDSFlipViewOpened = NO;
     isDSFlipViewAnimating = YES;
@@ -607,11 +610,11 @@ BOOL isDSFlipViewAnimating = NO;
         if(finished) {
             _smallView.userInteractionEnabled = YES;
             
-            // detach self from blackView and move to superView
             self.frame = outerFrame;
             
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.05f * NSEC_PER_SEC), dispatch_get_main_queue(),
                            ^(void){
+                               // detach self from blackView and move to superView
                                DSFlipView *me = self; // just to increase retain count while self is removed from superview
                                [me removeFromSuperview];
                                self.frame = _dummyView.frame;
